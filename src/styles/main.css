@@ -1,0 +1,29 @@
+.hero-heading {
+  @apply text-4xl mb-10 text-white font-medium;
+}
+
+.instructions .sub-title {
+  @apply text-gray-900 pb-2 border-b-2 border-gray-400 mb-5 text-xl font-medium;
+}
+.instructions .sub-title + p {
+  @apply mb-3;
+}
+.instructions .code {
+  @apply block font-mono border rounded bg-gray-100 text-gray-700 px-4 py-5 leading-normal text-sm shadow;
+}
+.instructions .code.pre {
+  @apply whitespace-pre;
+}
+.instructions .code em {
+  @apply opacity-75;
+}
+
+.social {
+  @apply block pt-6 text-gray-700;
+}
+.social a {
+  @apply text-blue-500 font-medium p-4;
+}
+.social a:hover {
+  @apply text-blue-700;
+}
