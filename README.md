@@ -34,9 +34,9 @@ npm install
 - `src` and subdirectories contain the source HTML, (S)CSS, JS and images
 - Build processes will generate files in `dist` (dev) and `build` (prod)
 
-## Notes
-
 `.gitignore` excludes the `dist` (dev) and `build` (prod) folders, as well as the built CSS (i.e. post-Sass, pre-Tailwind) in the `src` file. Modify as necessary for your project.
+
+## Notes
 
 The responsive image _markup_ generation is just regex string replacement. In larger projects, a more robust templating system would make much more sense, for instance see how a Hugo theme I've contributed to [handles it](https://github.com/chipzoller/hugo-clarity/blob/master/layouts/partials/image-feature.html#L35-L71).
 
