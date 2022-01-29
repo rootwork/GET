@@ -18,6 +18,7 @@
     "start": "gulp",
     "prod": "gulp prod",
     "test": "modern test --coverage --coverageReporters='text'",
+    "format": "modern format",
     "lint": "modern lint",
     "prettier": "npx prettier -w .",
     "precommit": "modern precommit"
