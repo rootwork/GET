@@ -2,14 +2,16 @@
 
 A starter project that GETs you up and running with Gulp, ES6 modules, and TailwindCSS.
 
-Gulp uses modern v4 syntax, and includes:
+The gulp portion uses modern v4 syntax, and includes:
 
 - Sass compilation (in SCSS format, so you can use CSS directly if you prefer) with autoprefixing and CSS purging
 - Responsive image file and markup generation (`<picture>` sets with `webp` and `avif` formats), automatically
 - HTML and Javascript minification
 - Live browser reloading
 
-Tailwind with ES6 modules means this starter project is easy to extend and adapt as you see fit. Prettier is also integrated and runs as a linter on every commit.
+Tailwind with ES6 modules means this starter project is easy to extend and adapt as you see fit.
+
+Linting also happens on every commit thanks to [Prettier](https://prettier.io/) and [modern-node](https://github.com/sheerun/modern-node).
 
 ## Installation
 
