@@ -150,18 +150,16 @@ function devClean() {
 //
 
 function prodHTML() {
-  return (
-    gulp
-      .src(`${options.paths.src.base}/**/*.html`)
-      .pipe(
-        replace(
-          /<img\s[^>]*?src\s*=\s*['\"]([^'\"\.]*?)\.([^'\"\.]*?)['\"][^>]*?>/g,
-          imageMarkup
-        )
+  return gulp
+    .src(`${options.paths.src.base}/**/*.html`)
+    .pipe(
+      replace(
+        /<img\s[^>]*?src\s*=\s*['\"]([^'\"\.]*?)\.([^'\"\.]*?)['\"][^>]*?>/g,
+        imageMarkup
       )
-      .pipe(minifyHTML({ collapseWhitespace: true }))
-      .pipe(gulp.dest(options.paths.build.base))
-  )
+    )
+    .pipe(minifyHTML({ collapseWhitespace: true }))
+    .pipe(gulp.dest(options.paths.build.base))
 }
 
 function prodStyles() {

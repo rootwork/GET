@@ -17,11 +17,8 @@
   "scripts": {
     "start": "gulp",
     "prod": "gulp prod",
-    "test": "modern test --coverage --coverageReporters='text'",
-    "format": "modern format",
-    "lint": "modern lint",
-    "prettier": "npx prettier -w .",
-    "precommit": "modern precommit"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "npx prettier -w ."
   },
   "devDependencies": {
     "@babel/core": "^7.16.12",
@@ -53,7 +50,6 @@
     "gulp-terser": "^2.1.0",
     "gulp-webp": "^4.0.1",
     "log-symbols": "^5.1.0",
-    "modern-node": "^2.9.0",
     "postcss": "^8.4.5",
     "prettier": "^2.5.1",
     "sass": "^1.49.0",
