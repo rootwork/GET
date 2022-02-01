@@ -103,15 +103,21 @@ function devStyles() {
     .pipe(gulp.dest(options.paths.dist.styles))
 }
 
-function devScripts() {
-  return gulp
-    .src([
-      `${options.paths.src.js}/lib/**/*.js`,
-      `${options.paths.src.js}/**/*.js`,
-      `!${options.paths.src.js}/**/vendor/*`,
-    ])
-    .pipe(concat({ path: 'scripts.js' }))
-    .pipe(gulp.dest(options.paths.dist.js))
+function devScripts(done) {
+  return [
+    gulp
+      .src([
+        `${options.paths.src.js}/lib/**/*.js`,
+        `${options.paths.src.js}/**/*.js`,
+        `!${options.paths.src.js}/vendor/**/*.js`,
+      ])
+      .pipe(concat({ path: 'scripts.js' }))
+      .pipe(gulp.dest(options.paths.dist.js)),
+    gulp
+      .src(`${options.paths.src.js}/vendor/*.js`)
+      .pipe(gulp.dest(options.paths.dist.js)),
+    done(),
+  ]
 }
 
 function devImages() {
@@ -183,15 +189,25 @@ function prodStyles() {
     .pipe(gulp.dest(options.paths.build.styles))
 }
 
-function prodScripts() {
-  return gulp
-    .src([
-      `${options.paths.src.js}/lib/**/*.js`,
-      `${options.paths.src.js}/**/*.js`,
-    ])
-    .pipe(concat({ path: 'scripts.js' }))
-    .pipe(minifyJS())
-    .pipe(gulp.dest(options.paths.build.js))
+function prodScripts(done) {
+  // For minification options, see:
+  // https://github.com/terser/terser#minify-options
+  return [
+    gulp
+      .src([
+        `${options.paths.src.js}/lib/**/*.js`,
+        `${options.paths.src.js}/**/*.js`,
+        `!${options.paths.src.js}/vendor/**/*.js`,
+      ])
+      .pipe(concat({ path: 'scripts.js' }))
+      .pipe(minifyJS())
+      .pipe(gulp.dest(options.paths.build.js)),
+    gulp
+      .src(`${options.paths.src.js}/vendor/*.js`)
+      .pipe(minifyJS())
+      .pipe(gulp.dest(options.paths.build.js)),
+    done(),
+  ]
 }
 
 function prodImages() {
