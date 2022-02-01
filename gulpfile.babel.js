@@ -16,8 +16,7 @@ import tailwindcss from 'tailwindcss'
 import autoprefixer from 'autoprefixer'
 import postcss from 'gulp-postcss'
 import concat from 'gulp-concat'
-import cleanCSS from 'gulp-clean-css'
-import purgeCSS from 'gulp-purgecss'
+import minifyCSS from 'gulp-clean-css'
 
 import minifyJS from 'gulp-terser'
 
@@ -185,7 +184,7 @@ function prodHTML() {
 function prodStyles() {
   return gulp
     .src(`${options.paths.dist.styles}/**/*`)
-    .pipe(cleanCSS({ compatibility: '*' }))
+    .pipe(minifyCSS({ compatibility: '*' }))
     .pipe(gulp.dest(options.paths.build.styles))
 }
 
