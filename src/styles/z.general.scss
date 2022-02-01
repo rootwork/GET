@@ -1,7 +1,8 @@
 // Use the @layer directive to tell Tailwind how to apply these styles with
 // specificity. Available options are 'base', 'components' and 'utilties'.
 // For more, see: https://tailwindcss.com/docs/functions-and-directives#layer
-@layer components {
+
+@layer utilities {
   .h-x6 {
     height: 6rem;
   }
@@ -10,9 +11,18 @@
     max-height: 38rem;
   }
 
-  .tablet {
-    background: linear-gradient(145deg, #cecede, #fff);
-    box-shadow: 6px 6px 18px #cccccc, -6px -6px 18px #fefefe;
+  .transition-bg {
+    transition-property: color, background-position;
+    transition-timing-function: ease-in-out;
+    transition-duration: 500ms;
+    background-size: 100% 200%;
+    background-position: 0 100%;
+
+    &:hover,
+    &:focus,
+    &:active {
+      background-position: 0 0;
+    }
   }
 
   // Zospace
@@ -37,5 +47,12 @@
 
   .w-2full {
     width: 200%;
+  }
+}
+
+@layer components {
+  .tablet {
+    background: linear-gradient(145deg, #cecede, #fff);
+    box-shadow: 6px 6px 18px #cccccc, -6px -6px 18px #fefefe;
   }
 }
