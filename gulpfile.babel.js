@@ -16,8 +16,7 @@ import tailwindcss from 'tailwindcss'
 import autoprefixer from 'autoprefixer'
 import postcss from 'gulp-postcss'
 import concat from 'gulp-concat'
-import cleanCSS from 'gulp-clean-css'
-import purgeCSS from 'gulp-purgecss'
+import minifyCSS from 'gulp-clean-css'
 
 import minifyJS from 'gulp-terser'
 
@@ -96,21 +95,28 @@ function devStyles() {
   return gulp
     .src(`${options.paths.src.styles}/**/*.scss`)
     .pipe(sass().on('error', sass.logError))
+    .pipe(concat({ path: '_generated.css' }))
     .pipe(gulp.dest(options.paths.src.styles))
     .pipe(postcss([tailwindcss(options.config.tailwindjs), autoprefixer]))
-    .pipe(concat({ path: 'style.css' }))
+    .pipe(concat({ path: 'styles.css' }))
     .pipe(gulp.dest(options.paths.dist.styles))
 }
 
-function devScripts() {
-  return gulp
-    .src([
-      `${options.paths.src.js}/lib/**/*.js`,
-      `${options.paths.src.js}/**/*.js`,
-      `!${options.paths.src.js}/**/vendor/*`,
-    ])
-    .pipe(concat({ path: 'scripts.js' }))
-    .pipe(gulp.dest(options.paths.dist.js))
+function devScripts(done) {
+  return [
+    gulp
+      .src([
+        `${options.paths.src.js}/lib/**/*.js`,
+        `${options.paths.src.js}/**/*.js`,
+        `!${options.paths.src.js}/vendor/**/*.js`,
+      ])
+      .pipe(concat({ path: 'scripts.js' }))
+      .pipe(gulp.dest(options.paths.dist.js)),
+    gulp
+      .src(`${options.paths.src.js}/vendor/*.js`)
+      .pipe(gulp.dest(options.paths.dist.js)),
+    done(),
+  ]
 }
 
 function devImages() {
@@ -122,7 +128,10 @@ function devImages() {
 
 function devFonts() {
   return gulp
-    .src(`${options.paths.src.fonts}/**/*`)
+    .src([
+      `${options.paths.src.fonts}/**/*`,
+      `!${options.paths.src.fonts}/**/*.md`,
+    ])
     .pipe(gulp.dest(options.paths.dist.fonts))
 }
 
@@ -175,19 +184,29 @@ function prodHTML() {
 function prodStyles() {
   return gulp
     .src(`${options.paths.dist.styles}/**/*`)
-    .pipe(cleanCSS({ compatibility: '*' }))
+    .pipe(minifyCSS({ compatibility: '*' }))
     .pipe(gulp.dest(options.paths.build.styles))
 }
 
-function prodScripts() {
-  return gulp
-    .src([
-      `${options.paths.src.js}/lib/**/*.js`,
-      `${options.paths.src.js}/**/*.js`,
-    ])
-    .pipe(concat({ path: 'scripts.js' }))
-    .pipe(minifyJS())
-    .pipe(gulp.dest(options.paths.build.js))
+function prodScripts(done) {
+  // For minification options, see:
+  // https://github.com/terser/terser#minify-options
+  return [
+    gulp
+      .src([
+        `${options.paths.src.js}/lib/**/*.js`,
+        `${options.paths.src.js}/**/*.js`,
+        `!${options.paths.src.js}/vendor/**/*.js`,
+      ])
+      .pipe(concat({ path: 'scripts.js' }))
+      .pipe(minifyJS())
+      .pipe(gulp.dest(options.paths.build.js)),
+    gulp
+      .src(`${options.paths.src.js}/vendor/*.js`)
+      .pipe(minifyJS())
+      .pipe(gulp.dest(options.paths.build.js)),
+    done(),
+  ]
 }
 
 function prodImages() {
@@ -199,7 +218,10 @@ function prodImages() {
 
 function prodFonts() {
   return gulp
-    .src(`${options.paths.src.fonts}/**/*`)
+    .src([
+      `${options.paths.src.fonts}/**/*`,
+      `!${options.paths.src.fonts}/**/*.md`,
+    ])
     .pipe(gulp.dest(options.paths.build.fonts))
 }
 
