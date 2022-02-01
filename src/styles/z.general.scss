@@ -25,6 +25,16 @@
     }
   }
 
+  .flippy {
+    transition: transform 0.8s;
+
+    &:hover,
+    &:focus,
+    &:active {
+      transform: rotate(-10deg) translateX(-1rem) translateY(0.5rem) scale(1.4);
+    }
+  }
+
   // Zospace
 
   .bg-gradient-zospace-1 {
