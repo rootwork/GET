@@ -13,8 +13,9 @@ The gulp portion uses modern v4 syntax, and includes:
 - Live browser reloading
 
 Tailwind with ES6 modules means this starter project is easy to extend and adapt
-as you see fit. [Prettier](https://prettier.io/) is integrated
-(`npm run format`).
+as you see fit. [Prettier](https://prettier.io/) is integrated: It runs on every
+commmit using Husky and Pretty Quick, and you can run it on all files at any
+time by using `npm run format`.
 
 ## Installation
 
