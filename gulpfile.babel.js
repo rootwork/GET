@@ -96,9 +96,10 @@ function devStyles() {
   return gulp
     .src(`${options.paths.src.styles}/**/*.scss`)
     .pipe(sass().on('error', sass.logError))
+    .pipe(concat({ path: '_generated.css' }))
     .pipe(gulp.dest(options.paths.src.styles))
     .pipe(postcss([tailwindcss(options.config.tailwindjs), autoprefixer]))
-    .pipe(concat({ path: 'style.css' }))
+    .pipe(concat({ path: 'styles.css' }))
     .pipe(gulp.dest(options.paths.dist.styles))
 }
 
@@ -120,6 +121,15 @@ function devImages() {
     .pipe(gulp.dest(options.paths.dist.img))
 }
 
+function devFonts() {
+  return gulp
+    .src([
+      `${options.paths.src.fonts}/**/*`,
+      `!${options.paths.src.fonts}/**/*.md`,
+    ])
+    .pipe(gulp.dest(options.paths.dist.fonts))
+}
+
 function watchFiles() {
   gulp.watch(
     `${options.paths.src.base}/**/*.html`,
@@ -136,6 +146,10 @@ function watchFiles() {
   gulp.watch(
     `${options.paths.src.img}/**/*`,
     gulp.series(devImages, previewReload)
+  )
+  gulp.watch(
+    `${options.paths.src.fonts}/**/*`,
+    gulp.series(devFonts, previewReload)
   )
   console.log('\n\t' + logSymbols.info, 'Watching for changes...\n')
 }
@@ -165,17 +179,6 @@ function prodHTML() {
 function prodStyles() {
   return gulp
     .src(`${options.paths.dist.styles}/**/*`)
-    .pipe(
-      purgeCSS({
-        content: ['src/**/*.{html,js}'],
-        defaultExtractor: (content) => {
-          const broadMatches = content.match(/[^<>"'`\s]*[^<>"'`\s:]/g) || []
-          const innerMatches =
-            content.match(/[^<>"'`\s.()]*[^<>"'`\s.():]/g) || []
-          return broadMatches.concat(innerMatches)
-        },
-      })
-    )
     .pipe(cleanCSS({ compatibility: '*' }))
     .pipe(gulp.dest(options.paths.build.styles))
 }
@@ -198,6 +201,15 @@ function prodImages() {
     .pipe(gulp.dest(options.paths.build.img))
 }
 
+function prodFonts() {
+  return gulp
+    .src([
+      `${options.paths.src.fonts}/**/*`,
+      `!${options.paths.src.fonts}/**/*.md`,
+    ])
+    .pipe(gulp.dest(options.paths.build.fonts))
+}
+
 function prodClean() {
   console.log('\n\t' + logSymbols.info, 'Cleaning generated files.\n')
   return del([options.paths.build.base])
@@ -217,14 +229,14 @@ function prodFinish(done) {
 
 const dev = gulp.series(
   devClean,
-  gulp.parallel(devStyles, devScripts, devImages, devHTML),
+  gulp.parallel(devStyles, devScripts, devImages, devFonts, devHTML),
   livePreview,
   watchFiles
 )
 
 const prod = gulp.series(
   prodClean,
-  gulp.parallel(prodStyles, prodScripts, prodImages, prodHTML),
+  gulp.parallel(prodStyles, prodScripts, prodImages, prodFonts, prodHTML),
   prodFinish
 )
 

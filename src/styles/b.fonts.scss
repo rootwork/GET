@@ -1,0 +1,34 @@
+// Load fonts in a cross-browser-compatible way. Font files themselves are
+// located in /src/fonts and configuration is in the `fontFamily` item in
+// tailwind.config.cjs at the root of the project.
+//
+// As with everything in GET, this is meant as a starting example only --
+// replace or remove these styles and font files as necessary.
+//
+// By default Tailwind provides three font families leveraging system font
+// stacks: font-sans, font-serif and font-mono. If you only want to use system
+// font stacks, you can remove this stylesheet and the font files entirely.
+//
+// For more, see:
+// https://tailwindcss.com/docs/font-family
+// https://stackoverflow.com/a/67190784
+// https://tailwindcss.com/docs/theme#extending-the-default-theme
+
+@layer base {
+  @font-face {
+    font-family: 'Raleway';
+    // Raleway is a variable font, so the same font file is used for multiple
+    // weights. For more information about variable fonts, see:
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Fonts/Variable_Fonts_Guide
+    src: url('../fonts/Raleway.woff2') format('woff2');
+    font-style: normal;
+    font-weight: 300 800;
+  }
+
+  @font-face {
+    font-family: 'Raleway';
+    src: url('../fonts/Raleway-Italic.woff2') format('woff2');
+    font-weight: 300 800;
+    font-style: italic;
+  }
+}

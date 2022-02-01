@@ -2,7 +2,11 @@ module.exports = {
   content: ['./src/**/*.{html,js}'],
   mode: 'jit',
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        raleway: ['Raleway'],
+      },
+    },
     screens: {
       sm: '640px',
       md: '768px',
