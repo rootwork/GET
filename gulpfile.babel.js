@@ -135,6 +135,15 @@ function devFonts() {
     .pipe(gulp.dest(options.paths.dist.fonts))
 }
 
+function devRoot() {
+  return gulp
+    .src([
+      `${options.paths.src.rootFiles}/**/*`,
+      `!${options.paths.src.rootFiles}/README.md`,
+    ])
+    .pipe(gulp.dest(options.paths.dist.base))
+}
+
 function watchFiles() {
   gulp.watch(
     `${options.paths.src.base}/**/*.html`,
@@ -155,6 +164,10 @@ function watchFiles() {
   gulp.watch(
     `${options.paths.src.fonts}/**/*`,
     gulp.series(devFonts, previewReload)
+  )
+  gulp.watch(
+    `${options.paths.src.rootFiles}/**/*`,
+    gulp.series(devRoot, previewReload)
   )
   console.log('\n\t' + logSymbols.info, 'Watching for changes...\n')
 }
@@ -225,6 +238,15 @@ function prodFonts() {
     .pipe(gulp.dest(options.paths.build.fonts))
 }
 
+function prodRoot() {
+  return gulp
+    .src([
+      `${options.paths.src.rootFiles}/**/*`,
+      `!${options.paths.src.rootFiles}/README.md`,
+    ])
+    .pipe(gulp.dest(options.paths.build.base))
+}
+
 function prodClean() {
   console.log('\n\t' + logSymbols.info, 'Cleaning generated files.\n')
   return del([options.paths.build.base])
@@ -244,14 +266,21 @@ function prodFinish(done) {
 
 const dev = gulp.series(
   devClean,
-  gulp.parallel(devStyles, devScripts, devImages, devFonts, devHTML),
+  gulp.parallel(devStyles, devScripts, devImages, devFonts, devRoot, devHTML),
   livePreview,
   watchFiles
 )
 
 const prod = gulp.series(
   prodClean,
-  gulp.parallel(prodStyles, prodScripts, prodImages, prodFonts, prodHTML),
+  gulp.parallel(
+    prodStyles,
+    prodScripts,
+    prodImages,
+    prodFonts,
+    prodRoot,
+    prodHTML
+  ),
   prodFinish
 )
 

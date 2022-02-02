@@ -7,6 +7,7 @@ export default {
     root: './',
     src: {
       base: './src',
+      rootFiles: './src/root',
       styles: './src/styles',
       js: './src/js',
       img: './src/img',
