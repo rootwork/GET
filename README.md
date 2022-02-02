@@ -37,8 +37,17 @@ npm install
 
 - `config.js` contains general project configuration
 - `tailwind.config.js` contains TailwindCSS configuration
-- `src` and subdirectories contain the source HTML, (S)CSS, JS and images
-- Build processes will generate files in `dist` (dev) and `build` (prod)
+- `src` are the files you'll be working with:
+  - `src/fonts` contain local font files; note related configuration in
+    `tailwind.config.cjs`
+  - `src/img` contains images which will be minified in builds
+  - `src/js` contains site scripts which will be minified, and contains
+    subdirectories for drop-in library scripts and vendor scripts
+  - `src/root` contains files you want copied to the root of your build
+    directory, like `robots.txt` or `CNAME`
+  - `src/styles` contains Sass files that generate minified CSS
+
+Build processes will generate files in `dist` (dev) and `build` (prod)
 
 `.gitignore` excludes the `dist` (dev) and `build` (prod) folders, as well as
 the built CSS (i.e. post-Sass, pre-Tailwind) in the `src` file. Modify as

@@ -1,0 +1,3 @@
+# Allow all crawlers access to all files (within the build directory)
+User-agent: *
+Disallow:
