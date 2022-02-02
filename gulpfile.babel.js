@@ -196,7 +196,12 @@ function prodHTML() {
 
 function prodStyles() {
   return gulp
-    .src(`${options.paths.src.styles}/**/*`)
+    .src(`${options.paths.src.styles}/**/*.scss`)
+    .pipe(sass().on('error', sass.logError))
+    .pipe(concat({ path: '_generated.css' }))
+    .pipe(gulp.dest(options.paths.src.styles))
+    .pipe(postcss([tailwindcss(options.config.tailwindjs), autoprefixer]))
+    .pipe(concat({ path: 'styles.css' }))
     .pipe(minifyCSS({ compatibility: '*' }))
     .pipe(gulp.dest(options.paths.build.styles))
 }
