@@ -196,7 +196,7 @@ function prodHTML() {
 
 function prodStyles() {
   return gulp
-    .src(`${options.paths.dist.styles}/**/*`)
+    .src(`${options.paths.src.styles}/**/*`)
     .pipe(minifyCSS({ compatibility: '*' }))
     .pipe(gulp.dest(options.paths.build.styles))
 }
