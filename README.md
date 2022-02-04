@@ -4,7 +4,7 @@ A starter project that GETs you up and running with Gulp (v4), ES6 JavaScript
 modules, and TailwindCSS (v3). Great as a kickstart template for trying out
 TailwindCSS, quickly generating simple sites, or working on SPAs.
 
-## Highlights
+## ✨ Highlights
 
 - Sass compilation (in SCSS format, so you can use CSS directly if you prefer)
   with autoprefixing, minification and sourcemaps, using modern
@@ -30,7 +30,7 @@ TailwindCSS, quickly generating simple sites, or working on SPAs.
   publishes your site each time you push to `main`. Don't use GitHub for
   development? You can remove the `.github` subdirectory.
 
-## Installation
+## 🔠 Installation
 
 1. Clone or fork this project.
 
@@ -41,14 +41,14 @@ TailwindCSS, quickly generating simple sites, or working on SPAs.
 
 3. Edit or remove the contents of the `.github` folder to match your workflow.
 
-## Development
+## 🚧 Development
 
 `gulp` or `npm start`
 
 After the site is built, your default web browser will open with the index file
 and automatically reload whenever project files change.
 
-## Production
+## 🚚 Production
 
 `gulp --prod` or `npm run prod`
 
@@ -56,7 +56,7 @@ Take a look at the [included GitHub action](.github/workflows/build.yml) to
 automatically publish your project to GitHub Pages on every push. This own
 project uses it to build [the GET page](https://rootwork.github.io/GET/) itself!
 
-## File structure
+## 📂 File structure
 
 - [`config.js`](config.js) contains path and project configuration -- edit this
   to suit your needs.
@@ -74,7 +74,7 @@ project uses it to build [the GET page](https://rootwork.github.io/GET/) itself!
 
 Build processes will generate files in `dist`, which is ignored by git.
 
-## Notes
+## ⚠️ Limitations
 
 Responsive image generation works great. The responsive image _markup_
 generation is just regex string replacement. In larger projects, a more robust
@@ -82,6 +82,36 @@ templating system would make much more sense, for instance see how a Hugo theme
 I've contributed to
 [handles it](https://github.com/chipzoller/hugo-clarity/blob/master/layouts/partials/image-feature.html#L35-L71).
 
-Inspired by
-[stefansdev/creativdepot](https://github.com/stefansdev/creativdepot) and
-[lazymozek/gulp-with-tailwindcss](https://github.com/lazymozek/gulp-with-tailwindcss).
+## 📑 Built with
+
+GET originally inspired by https://github.com/stefansdev/creativdepot and
+https://github.com/lazymozek/gulp-with-tailwindcss
+
+The big three components are, of course:
+
+- https://github.com/gulpjs/gulp
+- https://github.com/babel/babel
+- https://github.com/tailwindlabs/tailwindcss
+
+Other projects GET leverages:
+
+- https://github.com/eslint/eslint
+- https://github.com/typicode/husky
+- https://github.com/prettier/prettier
+- https://github.com/azz/pretty-quick
+- https://github.com/Browsersync/browser-sync
+- https://github.com/lovell/sharp
+- https://github.com/terser/terser
+- https://github.com/sass/sass
+- https://github.com/postcss/postcss
+- https://github.com/postcss/autoprefixer
+- https://github.com/gulp-sourcemaps/gulp-sourcemaps
+- https://github.com/scniro/gulp-clean-css
+- https://github.com/contra/gulp-concat
+- https://github.com/jonschlinkert/gulp-htmlmin
+- https://github.com/robrich/gulp-if
+- https://github.com/lazd/gulp-replace
+- https://github.com/yargs/yargs
+- https://github.com/sindresorhus/log-symbols
+
+**Thank you open source!**
