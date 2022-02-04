@@ -32,9 +32,14 @@ TailwindCSS, quickly generating simple sites, or working on SPAs.
 
 ## Installation
 
-```sh
-npm install
-```
+1. Clone or fork this project.
+
+1b. Optional: Edit the project name, contact information and URLs in
+[`package.json`](package.json) to match your own.
+
+2. Run `npm install`
+
+3. Edit or remove the contents of the `.github` folder to match your workflow.
 
 ## Development
 
