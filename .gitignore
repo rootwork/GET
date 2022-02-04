@@ -1,6 +1,5 @@
 # Project-specific
 dist/
-build/
 src/styles/*.css
 
 # Trash

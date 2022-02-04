@@ -1,17 +1,23 @@
 import options from './config.js'
 
+import yargs from 'yargs'
+const args = yargs(process.argv.slice(2)).argv
+
 import gulp from 'gulp'
+const { src, dest, watch, series, parallel } = gulp
+import gulpif from 'gulp-if'
 import babel from 'gulp-babel'
+
 import del from 'del'
 
 import browserSync from 'browser-sync'
 
+import minifyHTML from 'gulp-htmlmin'
+
 import dartSass from 'sass'
 import gulpSass from 'gulp-sass'
 const sass = gulpSass(dartSass)
-
-import minifyHTML from 'gulp-htmlmin'
-
+import sourcemaps from 'gulp-sourcemaps'
 import tailwindcss from 'tailwindcss'
 import autoprefixer from 'autoprefixer'
 import postcss from 'gulp-postcss'
@@ -25,25 +31,15 @@ import replace from 'gulp-replace'
 
 import logSymbols from 'log-symbols'
 
-// Browser previews (development)
-const server = browserSync.create()
-
-function livePreview(done) {
-  server.init({
-    server: {
-      baseDir: options.paths.dist.base,
-    },
-    port: options.config.port || 5000,
-  })
-  done()
+// --prod on the CLI sets production environment
+let PRODUCTION
+if (args.prod === true) {
+  PRODUCTION = true
+} else {
+  PRODUCTION = false
 }
 
-// Browser reloads
-function previewReload(done) {
-  console.log('\n\t' + logSymbols.info, 'Reloading browser preview.\n')
-  server.reload()
-  done()
-}
+console.log(PRODUCTION)
 
 // Modern image replacement
 const imageOptions = {
@@ -75,218 +71,141 @@ const imageMarkup = `
 </picture>
 `
 
-//
-// Development tasks
-//
-
-function devHTML() {
-  return gulp
-    .src(`${options.paths.src.base}/**/*.html`)
-    .pipe(
-      replace(
-        /<img\s[^>]*?src\s*=\s*['\"]([^'\"\.]*?)\.([^'\"\.]*?)['\"][^>]*?>/g,
-        imageMarkup
-      )
-    )
-    .pipe(gulp.dest(options.paths.dist.base))
+// Browser serving
+const server = browserSync.create()
+export const serve = (done) => {
+  if (!PRODUCTION) {
+    server.init({
+      server: {
+        baseDir: options.paths.dist.base,
+      },
+      port: options.config.port || 5000,
+    })
+  }
+  done()
 }
 
-function devStyles() {
-  return gulp
-    .src(`${options.paths.src.styles}/**/*.scss`)
-    .pipe(sass().on('error', sass.logError))
-    .pipe(concat({ path: '_generated.css' }))
-    .pipe(gulp.dest(options.paths.src.styles))
-    .pipe(postcss([tailwindcss(options.config.tailwindjs), autoprefixer]))
-    .pipe(concat({ path: 'styles.css' }))
-    .pipe(gulp.dest(options.paths.dist.styles))
+// Browser reloads
+export const reload = (done) => {
+  if (!PRODUCTION) {
+    console.log('\n\t' + logSymbols.info, 'Reloading browser preview.\n')
+    server.reload()
+  }
+  done()
 }
 
-function devScripts(done) {
-  return [
-    gulp
-      .src([
-        `${options.paths.src.js}/lib/**/*.js`,
-        `${options.paths.src.js}/**/*.js`,
-        `!${options.paths.src.js}/vendor/**/*.js`,
-      ])
-      .pipe(concat({ path: 'scripts.js' }))
-      .pipe(gulp.dest(options.paths.dist.js)),
-    gulp
-      .src(`${options.paths.src.js}/vendor/*.js`)
-      .pipe(gulp.dest(options.paths.dist.js)),
-    done(),
-  ]
-}
-
-function devImages() {
-  return gulp
-    .src(`${options.paths.src.img}/**/*`)
-    .pipe(sharpResponsive(imageOptions))
-    .pipe(gulp.dest(options.paths.dist.img))
-}
-
-function devFonts() {
-  return gulp
-    .src([
-      `${options.paths.src.fonts}/**/*`,
-      `!${options.paths.src.fonts}/**/*.md`,
-    ])
-    .pipe(gulp.dest(options.paths.dist.fonts))
-}
-
-function devRoot() {
-  return gulp
-    .src([
-      `${options.paths.src.rootFiles}/**/*`,
-      `!${options.paths.src.rootFiles}/README.md`,
-    ])
-    .pipe(gulp.dest(options.paths.dist.base))
-}
-
-function watchFiles() {
-  gulp.watch(
-    `${options.paths.src.base}/**/*.html`,
-    gulp.series(devHTML, devStyles, previewReload)
-  )
-  gulp.watch(
-    [options.config.tailwindjs, `${options.paths.src.styles}/**/*.scss`],
-    gulp.series(devStyles, previewReload)
-  )
-  gulp.watch(
-    `${options.paths.src.js}/**/*.js`,
-    gulp.series(devScripts, previewReload)
-  )
-  gulp.watch(
-    `${options.paths.src.img}/**/*`,
-    gulp.series(devImages, previewReload)
-  )
-  gulp.watch(
-    `${options.paths.src.fonts}/**/*`,
-    gulp.series(devFonts, previewReload)
-  )
-  gulp.watch(
-    `${options.paths.src.rootFiles}/**/*`,
-    gulp.series(devRoot, previewReload)
-  )
-  console.log('\n\t' + logSymbols.info, 'Watching for changes...\n')
-}
-
-function devClean() {
+// Cleanup
+export const clean = () => {
   console.log('\n\t' + logSymbols.info, 'Cleaning generated files.\n')
   return del([options.paths.dist.base])
 }
 
-//
-// Production tasks
-//
-
-function prodHTML() {
-  return gulp
-    .src(`${options.paths.src.base}/**/*.html`)
+// HTML processing
+export const html = () => {
+  return src(`${options.paths.src.base}/**/*.html`)
     .pipe(
       replace(
         /<img\s[^>]*?src\s*=\s*['\"]([^'\"\.]*?)\.([^'\"\.]*?)['\"][^>]*?>/g,
         imageMarkup
       )
     )
-    .pipe(minifyHTML({ collapseWhitespace: true }))
-    .pipe(gulp.dest(options.paths.build.base))
+    .pipe(gulpif(PRODUCTION, minifyHTML({ collapseWhitespace: true })))
+    .pipe(dest(options.paths.dist.base))
 }
 
-function prodStyles() {
-  return gulp
-    .src(`${options.paths.src.styles}/**/*.scss`)
+// Root files processing
+export const root = () => {
+  return src([
+    `${options.paths.src.rootFiles}/**/*`,
+    `!${options.paths.src.rootFiles}/README.md`,
+  ]).pipe(dest(options.paths.dist.base))
+}
+
+// Style processing
+export const styles = () => {
+  return src(`${options.paths.src.styles}/**/*.scss`)
+    .pipe(gulpif(!PRODUCTION, sourcemaps.init()))
     .pipe(sass().on('error', sass.logError))
     .pipe(concat({ path: '_generated.css' }))
-    .pipe(gulp.dest(options.paths.src.styles))
+    .pipe(dest(options.paths.src.styles))
     .pipe(postcss([tailwindcss(options.config.tailwindjs), autoprefixer]))
     .pipe(concat({ path: 'styles.css' }))
-    .pipe(minifyCSS({ compatibility: '*' }))
-    .pipe(gulp.dest(options.paths.build.styles))
+    .pipe(gulpif(PRODUCTION, minifyCSS({ compatibility: '*' })))
+    .pipe(gulpif(!PRODUCTION, sourcemaps.write()))
+    .pipe(dest(options.paths.dist.styles))
 }
 
-function prodScripts(done) {
-  // For minification options, see:
-  // https://github.com/terser/terser#minify-options
+// Script processing
+//
+// For minification options, see:
+// https://github.com/terser/terser#minify-options
+export const scripts = (done) => {
   return [
-    gulp
-      .src([
-        `${options.paths.src.js}/lib/**/*.js`,
-        `${options.paths.src.js}/**/*.js`,
-        `!${options.paths.src.js}/vendor/**/*.js`,
-      ])
+    src([
+      `${options.paths.src.js}/lib/**/*.js`,
+      `${options.paths.src.js}/**/*.js`,
+      `!${options.paths.src.js}/vendor/**/*.js`,
+    ])
       .pipe(concat({ path: 'scripts.js' }))
-      .pipe(minifyJS())
-      .pipe(gulp.dest(options.paths.build.js)),
-    gulp
-      .src(`${options.paths.src.js}/vendor/*.js`)
-      .pipe(minifyJS())
-      .pipe(gulp.dest(options.paths.build.js)),
+      .pipe(gulpif(PRODUCTION, minifyJS()))
+      .pipe(dest(options.paths.dist.js)),
+    src(`${options.paths.src.js}/vendor/*.js`)
+      .pipe(gulpif(PRODUCTION, minifyJS()))
+      .pipe(dest(options.paths.dist.js)),
     done(),
   ]
 }
 
-function prodImages() {
-  return gulp
-    .src(options.paths.src.img + '/**/*')
+// Image processing
+export const images = () => {
+  return src(`${options.paths.src.img}/**/*`)
     .pipe(sharpResponsive(imageOptions))
-    .pipe(gulp.dest(options.paths.build.img))
+    .pipe(dest(options.paths.dist.img))
 }
 
-function prodFonts() {
-  return gulp
-    .src([
-      `${options.paths.src.fonts}/**/*`,
-      `!${options.paths.src.fonts}/**/*.md`,
-    ])
-    .pipe(gulp.dest(options.paths.build.fonts))
+// Font processing
+export const fonts = () => {
+  return src([
+    `${options.paths.src.fonts}/**/*`,
+    `!${options.paths.src.fonts}/**/*.md`,
+  ]).pipe(dest(options.paths.dist.fonts))
 }
 
-function prodRoot() {
-  return gulp
-    .src([
-      `${options.paths.src.rootFiles}/**/*`,
-      `!${options.paths.src.rootFiles}/README.md`,
-    ])
-    .pipe(gulp.dest(options.paths.build.base))
-}
-
-function prodClean() {
-  console.log('\n\t' + logSymbols.info, 'Cleaning generated files.\n')
-  return del([options.paths.build.base])
-}
-
-function prodFinish(done) {
-  console.log(
-    '\n\t' + logSymbols.info,
-    `Production build complete at ${options.paths.build.base}\n`
-  )
+// Watch tasks
+export const watchFiles = (done) => {
+  if (!PRODUCTION) {
+    watch(`${options.paths.src.base}/**/*.html`, series(html, styles, reload))
+    watch(`${options.paths.src.rootFiles}/**/*`, series(root, reload))
+    watch(
+      [options.config.tailwindjs, `${options.paths.src.styles}/**/*.scss`],
+      series(styles, reload)
+    )
+    watch(`${options.paths.src.js}/**/*.js`, series(scripts, reload))
+    watch(`${options.paths.src.img}/**/*`, series(images, reload))
+    watch(`${options.paths.src.fonts}/**/*`, series(fonts, reload))
+    console.log('\n\t' + logSymbols.info, 'Watching for changes...\n')
+  }
   done()
 }
 
-//
-// Exports
-//
+// Build notification
+export const complete = (done) => {
+  if (PRODUCTION) {
+    console.log(
+      '\n\t' + logSymbols.info,
+      `Production build complete at ${options.paths.dist.base}\n`
+    )
+  }
+  done()
+}
 
-const dev = gulp.series(
-  devClean,
-  gulp.parallel(devStyles, devScripts, devImages, devFonts, devRoot, devHTML),
-  livePreview,
-  watchFiles
+// Gulp tasks
+export const build = series(
+  clean,
+  parallel(styles, scripts, images, fonts, root, html),
+  serve,
+  watchFiles,
+  complete
 )
 
-const prod = gulp.series(
-  prodClean,
-  gulp.parallel(
-    prodStyles,
-    prodScripts,
-    prodImages,
-    prodFonts,
-    prodRoot,
-    prodHTML
-  ),
-  prodFinish
-)
-
-export { dev as default, prod }
+export default build

@@ -20,12 +20,5 @@ export default {
       img: './dist/img',
       fonts: './dist/fonts',
     },
-    build: {
-      base: './build',
-      styles: './build/css',
-      js: './build/js',
-      img: './build/img',
-      fonts: './build/fonts',
-    },
   },
 }
