@@ -39,9 +39,16 @@ if (args.prod === true) {
   PRODUCTION = false
 }
 
+// Image formats and replacement
+//
+// Sharp should process jp(e)g, png, webp, gif, avif, heif, tiff
+// In practice, avif and heif source files are not recommended.
+const imageFormats = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'tiff']
 // Modern image replacement
-const imageOptions = {
-  formats: [
+let imageOptions = {}
+
+if (options.config.modernImages) {
+  imageOptions.formats = [
     { width: 640, format: 'jpeg', rename: { suffix: '-sm' } },
     { width: 768, format: 'jpeg', rename: { suffix: '-md' } },
     { width: 1024, format: 'jpeg', rename: { suffix: '-lg' } },
@@ -51,9 +58,12 @@ const imageOptions = {
     { width: 640, format: 'avif', rename: { suffix: '-sm' } },
     { width: 768, format: 'avif', rename: { suffix: '-md' } },
     { width: 1024, format: 'avif', rename: { suffix: '-lg' } },
-  ],
-  includeOriginalFile: true,
+  ]
+} else {
+  imageOptions.formats = []
 }
+imageOptions.includeOriginalFile = true
+
 const imageMarkup = `
 <picture>
   <source srcset="$1-sm.avif" media="(max-width: 640px)" type="image/avif" />
@@ -62,9 +72,9 @@ const imageMarkup = `
   <source srcset="$1-sm.webp" media="(max-width: 640px)" type="image/webp" />
   <source srcset="$1-md.webp" media="(max-width: 768px)" type="image/webp" />
   <source srcset="$1-lg.webp" media="(max-width: 1024px)" type="image/webp" />
-  <source srcset="$1-sm.jpg" media="(max-width: 640px)" type="image/jpeg" />
-  <source srcset="$1-md.jpg" media="(max-width: 768px)" type="image/jpeg" />
-  <source srcset="$1-lg.jpg" media="(max-width: 1024px)" type="image/jpeg" />
+  <source srcset="$1-sm.jpeg" media="(max-width: 640px)" type="image/jpeg" />
+  <source srcset="$1-md.jpeg" media="(max-width: 768px)" type="image/jpeg" />
+  <source srcset="$1-lg.jpeg" media="(max-width: 1024px)" type="image/jpeg" />
   $&
 </picture>
 `
@@ -96,9 +106,12 @@ export const clean = () => {
 export const html = () => {
   return src(`${options.paths.src.base}/**/*.html`)
     .pipe(
-      replace(
-        /<img\s[^>]*?src\s*=\s*['\"]([^'\"\.]*?)\.([^'\"\.]*?)['\"][^>]*?>/g,
-        imageMarkup
+      gulpif(
+        options.config.modernImages,
+        replace(
+          /<img\s[^>]*?src\s*=\s*['\"]([^'\"\.]*?)\.([^'\"\.]*?)['\"][^>]*?>/g,
+          imageMarkup
+        )
       )
     )
     .pipe(gulpif(PRODUCTION, minifyHTML({ collapseWhitespace: true })))
@@ -149,10 +162,7 @@ export const scripts = (done) => {
 
 // Image processing
 export const images = () => {
-  return src([
-    `${options.paths.src.img}/**/*`,
-    `!${options.paths.src.img}/**/*.md`,
-  ])
+  return src(`${options.paths.src.img}/**/*.{${imageFormats}}`)
     .pipe(sharpResponsive(imageOptions))
     .pipe(dest(options.paths.dist.img))
 }
