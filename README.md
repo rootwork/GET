@@ -1,15 +1,24 @@
 # GET: Gulp, ES6, TailwindCSS
 
-A starter project that GETs you up and running with Gulp, ES6 modules, and
-TailwindCSS.
+A starter project that GETs you up and running with Gulp (v4), ES6 modules, and
+TailwindCSS (v3).
 
 The gulp portion uses modern v4 syntax, and includes:
 
 - Sass compilation (in SCSS format, so you can use CSS directly if you prefer)
-  with autoprefixing and CSS purging
+  with autoprefixing, minification and sourcemaps, using modern
+  [Dart Sass](https://sass-lang.com/dart-sass).
 - Responsive image file and markup generation (`<picture>` sets with `webp` and
-  `avif` formats), automatically
-- HTML and Javascript minification
+  `avif` formats), automatically.
+- HTML and Javascript minification.
+- All the usual Tailwind 3 stuff, including
+  [Just-In-Time mode](https://tailwindcss.com/blog/just-in-time-the-next-generation-of-tailwind-css)
+  and
+  [CSS purging by default](https://tailwindcss.com/docs/content-configuration#configuring-source-paths).
+  (If you weren't around for the history of TailwindCSS, just know that these
+  are both Good Things™.) The Tailwind
+  [typography plugin](https://tailwindcss.com/docs/typography-plugin) is also
+  included.
 - Live browser reloading
 
 Tailwind with ES6 modules means this starter project is easy to extend and adapt
