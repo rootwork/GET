@@ -53,24 +53,21 @@ project uses it to build [the GET page](https://rootwork.github.io/GET/) itself!
 
 ## File structure
 
-- [`config.js`](config.js) contains general project configuration
+- [`config.js`](config.js) contains path and project configuration -- edit this
+  to suit your needs.
 - [`tailwind.config.cjs`](tailwind.config.cjs) contains TailwindCSS
-  configuration
+  configuration.
 - `src` contains the files you'll be working with:
   - [`src/fonts`](src/fonts) contain local font files; note related
-    configuration in `tailwind.config.cjs`
-  - [`src/img`](src/img) contains images which will be minified in builds
+    configuration in `tailwind.config.cjs`.
+  - [`src/img`](src/img) contains images which will be minified in builds.
   - [`src/js`](src/js) contains site scripts which will be minified, and
-    contains subdirectories for drop-in library scripts and vendor scripts
+    contains subdirectories for drop-in library scripts and vendor scripts.
   - [`src/root`](src/root) contains files you want copied to the root of your
-    build directory, like `robots.txt` or `CNAME`
-  - [`src/styles`](src/styles) contains Sass files that generate minified CSS
+    build directory, like `robots.txt` or `CNAME`.
+  - [`src/styles`](src/styles) contains Sass files that generate minified CSS.
 
-Build processes will generate files in `dist`.
-
-`.gitignore` excludes the build folders, as well as the built CSS (i.e.
-post-Sass, pre-Tailwind) in the `src` file. Modify as necessary for your
-project.
+Build processes will generate files in `dist`, which is ignored by git.
 
 ## Notes
 

@@ -1,3 +1,6 @@
+# Build
+dist/
+
 # Config files
 .editorconfig
 .gitignore
@@ -11,9 +14,6 @@ LICENSE*.*
 # Temporary files
 .tmp/
 *.tmp
-
-# Builds
-dist
 
 # Package files, since these will be auto-generated
 package.json
