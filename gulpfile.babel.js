@@ -150,7 +150,10 @@ export const scripts = (done) => {
 
 // Image processing
 export const images = () => {
-  return src(`${options.paths.src.img}/**/*`)
+  return src([
+    `${options.paths.src.img}/**/*`,
+    `!${options.paths.src.img}/**/*.md`,
+  ])
     .pipe(sharpResponsive(imageOptions))
     .pipe(dest(options.paths.dist.img))
 }
