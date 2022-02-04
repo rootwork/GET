@@ -23,12 +23,12 @@ TailwindCSS, quickly generating simple sites, or working on SPAs.
 - Live browser reloading.
 - ES6 modules and syntax, so this starter project is easy to extend and adapt as
   you see fit.
-- **Bonus:** [Prettier](https://prettier.io/) is integrated: It runs on every
-  commmit using Husky and Pretty Quick, and you can run it on all files at any
-  time by using `npm run format`.
-- **Bonus:** A GitHub Pages action ready to go that automatically builds and
-  publishes your site every time you push to `main`. (If you don't use GitHub
-  for development, you can remove the `.github` subdirectory.)
+- **Bonus:** [Prettier](https://prettier.io/) is integrated and runs on every
+  commmit using Husky and Pretty Quick. You can run it on all files at any time
+  by using `npm run format`.
+- **Bonus:** A GitHub Pages action is included that automatically builds and
+  publishes your site each time you push to `main`. Don't use GitHub for
+  development? You can remove the `.github` subdirectory.
 
 ## Installation
 
