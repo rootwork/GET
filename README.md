@@ -54,7 +54,8 @@ project uses it to build [the GET page](https://rootwork.github.io/GET/) itself!
 ## File structure
 
 - [`config.js`](config.js) contains general project configuration
-- [`tailwind.config.js`](tailwind.config.js) contains TailwindCSS configuration
+- [`tailwind.config.cjs`](tailwind.config.cjs) contains TailwindCSS
+  configuration
 - `src` contains the files you'll be working with:
   - [`src/fonts`](src/fonts) contain local font files; note related
     configuration in `tailwind.config.cjs`

@@ -9,5 +9,4 @@ Script files in this directory and its children will be compiled as follows:
    `js/vendor/foo.js` here will be available in minified form at `js/foo.js` in
    the build.
 
-To change this behavior, see the `devScripts` and `prodScripts` tasks in
-`gulpfile.babel.js`.
+To change this behavior, see the `scripts` task in `gulpfile.babel.js`.
