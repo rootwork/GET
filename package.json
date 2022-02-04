@@ -1,5 +1,5 @@
 {
-  "name": "waronhf",
+  "name": "GET",
   "version": "1.0.0",
   "type": "module",
   "main": "gulpfile.js",
@@ -13,7 +13,7 @@
   "bugs": {
     "url": "https://github.com/rootwork/GET/issues"
   },
-  "homepage": "https://github.com/rootwork/GET#readme",
+  "homepage": "https://rootwork.github.io/GET/",
   "scripts": {
     "start": "gulp",
     "prod": "gulp --prod",
