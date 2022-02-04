@@ -31,7 +31,7 @@ npm install
 
 **Production:**
 
-`gulp prod` or `npm run prod`
+`gulp --prod` or `npm run prod`
 
 ## File structure
 
@@ -47,11 +47,11 @@ npm install
     directory, like `robots.txt` or `CNAME`
   - `src/styles` contains Sass files that generate minified CSS
 
-Build processes will generate files in `dist` (dev) and `build` (prod)
+Build processes will generate files in `dist`.
 
-`.gitignore` excludes the `dist` (dev) and `build` (prod) folders, as well as
-the built CSS (i.e. post-Sass, pre-Tailwind) in the `src` file. Modify as
-necessary for your project.
+`.gitignore` excludes the build folders, as well as the built CSS (i.e.
+post-Sass, pre-Tailwind) in the `src` file. Modify as necessary for your
+project.
 
 ## Notes
 
@@ -60,5 +60,6 @@ larger projects, a more robust templating system would make much more sense, for
 instance see how a Hugo theme I've contributed to
 [handles it](https://github.com/chipzoller/hugo-clarity/blob/master/layouts/partials/image-feature.html#L35-L71).
 
-Originally forked from
+Inspired by
+[stefansdev/creativdepot](https://github.com/stefansdev/creativdepot) and
 [lazymozek/gulp-with-tailwindcss](https://github.com/lazymozek/gulp-with-tailwindcss).

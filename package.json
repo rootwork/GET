@@ -16,7 +16,7 @@
   "homepage": "https://github.com/rootwork/GET#readme",
   "scripts": {
     "start": "gulp",
-    "prod": "gulp prod",
+    "prod": "gulp --prod",
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "npx prettier -w .",
     "prepare": "husky install"

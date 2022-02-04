@@ -39,8 +39,6 @@ if (args.prod === true) {
   PRODUCTION = false
 }
 
-console.log(PRODUCTION)
-
 // Modern image replacement
 const imageOptions = {
   formats: [
@@ -73,25 +71,19 @@ const imageMarkup = `
 
 // Browser serving
 const server = browserSync.create()
-export const serve = (done) => {
-  if (!PRODUCTION) {
-    server.init({
-      server: {
-        baseDir: options.paths.dist.base,
-      },
-      port: options.config.port || 5000,
-    })
-  }
-  done()
+export const serve = () => {
+  server.init({
+    server: {
+      baseDir: options.paths.dist.base,
+    },
+    port: options.config.port || 5000,
+  })
 }
 
 // Browser reloads
-export const reload = (done) => {
-  if (!PRODUCTION) {
-    console.log('\n\t' + logSymbols.info, 'Reloading browser preview.\n')
-    server.reload()
-  }
-  done()
+export const reload = () => {
+  console.log('\n\t' + logSymbols.info, 'Reloading browser preview.\n')
+  server.reload()
 }
 
 // Cleanup
@@ -172,40 +164,43 @@ export const fonts = () => {
 }
 
 // Watch tasks
-export const watchFiles = (done) => {
-  if (!PRODUCTION) {
-    watch(`${options.paths.src.base}/**/*.html`, series(html, styles, reload))
-    watch(`${options.paths.src.rootFiles}/**/*`, series(root, reload))
-    watch(
-      [options.config.tailwindjs, `${options.paths.src.styles}/**/*.scss`],
-      series(styles, reload)
-    )
-    watch(`${options.paths.src.js}/**/*.js`, series(scripts, reload))
-    watch(`${options.paths.src.img}/**/*`, series(images, reload))
-    watch(`${options.paths.src.fonts}/**/*`, series(fonts, reload))
-    console.log('\n\t' + logSymbols.info, 'Watching for changes...\n')
-  }
-  done()
+export const watchFiles = () => {
+  watch(`${options.paths.src.base}/**/*.html`, series(html, styles, reload))
+  watch(`${options.paths.src.rootFiles}/**/*`, series(root, reload))
+  watch(
+    [options.config.tailwindjs, `${options.paths.src.styles}/**/*.scss`],
+    series(styles, reload)
+  )
+  watch(`${options.paths.src.js}/**/*.js`, series(scripts, reload))
+  watch(`${options.paths.src.img}/**/*`, series(images, reload))
+  watch(`${options.paths.src.fonts}/**/*`, series(fonts, reload))
+  console.log('\n\t' + logSymbols.info, 'Watching for changes...\n')
 }
 
 // Build notification
 export const complete = (done) => {
-  if (PRODUCTION) {
-    console.log(
-      '\n\t' + logSymbols.info,
-      `Production build complete at ${options.paths.dist.base}\n`
-    )
-  }
-  done()
+  console.log(
+    '\n\t' + logSymbols.info,
+    `Production build complete at ${options.paths.dist.base}\n`
+  ),
+    done()
 }
 
 // Gulp tasks
-export const build = series(
-  clean,
-  parallel(styles, scripts, images, fonts, root, html),
-  serve,
-  watchFiles,
-  complete
-)
+let build
+if (!PRODUCTION) {
+  build = series(
+    clean,
+    parallel(styles, scripts, images, fonts, root, html),
+    serve,
+    watchFiles
+  )
+} else {
+  build = series(
+    clean,
+    parallel(styles, scripts, images, fonts, root, html),
+    complete
+  )
+}
 
 export default build
