@@ -48,7 +48,8 @@ and automatically reload whenever project files change.
 `gulp --prod` or `npm run prod`
 
 Take a look at the [included GitHub action](.github/workflows/build.yml) to
-automatically publish your project to GitHub Pages on every push.
+automatically publish your project to GitHub Pages on every push. This own
+project uses it to build [the GET page](https://rootwork.github.io/GET/) itself!
 
 ## File structure
 
