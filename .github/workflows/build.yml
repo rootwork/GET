@@ -1,0 +1,40 @@
+name: Build and publish to GitHub Pages branch
+
+on:
+  push:
+    branches:
+      # Build whenever the main branch is pushed.
+      - 'main'
+  pull_request:
+    branches:
+      # Build whenever the main branch has a pull request.
+      - 'main'
+    paths-ignore:
+      # Exclude changes that only affect files in the `.github` directory.
+      - '.github/**'
+
+jobs:
+  build:
+    name: Build and publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+      - name: Install dependencies
+        # The first line of `run` is designed to omit husky setup, since it's
+        # not necessary or desireable in a remote build.
+        run: |
+          npm set-script prepare ""
+          npm ci
+      - name: Build the production site
+        run: gulp --prod
+      - name: Publish to the GitHub Pages branch
+        uses: s0/git-publish-subdir-action@develop
+        env:
+          REPO: self
+          BRANCH: gh-pages # Branch name where you want to push the built site.
+          FOLDER: dist # Directory where the site is built.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Automatically generated.
+          MESSAGE: 'Build: ({sha}) {msg}' # The commit message.
