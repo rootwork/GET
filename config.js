@@ -2,7 +2,7 @@ export default {
   config: {
     tailwindjs: './tailwind.config.cjs',
     port: 9050,
-    modernImages: false,
+    modernImages: true,
   },
   paths: {
     root: './',

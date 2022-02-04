@@ -80,9 +80,10 @@ Responsive image generation and markup generation is designed for single-page
 sites with a handful of images. The markup generation is just regex string
 replacement, and images that have the same name but different formats will
 clobber each other. In larger projects, a more efficient and robust templating
-system would make much more sense. For instance see how a Hugo theme I've
+system would make much more sense -- for instance see how a Hugo theme I've
 contributed to
 [handles it](https://github.com/chipzoller/hugo-clarity/blob/master/layouts/partials/image-feature.html#L35-L71).
+
 To omit GET's image and markup generation, set `modernImages` to `false` in
 [`config.js`](config.js). Images will still be minified, but alternate formats
 and markup will not be created.
