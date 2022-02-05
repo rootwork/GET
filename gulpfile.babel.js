@@ -225,6 +225,7 @@ export const complete = (done) => {
 // Gulp tasks
 let build
 if (!PRODUCTION) {
+  // dev
   build = series(
     clean,
     parallel(styles, scripts, images, fonts, root, html),
@@ -233,6 +234,7 @@ if (!PRODUCTION) {
   )
 } else {
   if (options.config.cacheBusting) {
+    // prod with cache-busting
     build = series(
       clean,
       html,
@@ -247,6 +249,7 @@ if (!PRODUCTION) {
       complete
     )
   } else {
+    // prod without cache-busting
     build = series(
       clean,
       parallel(styles, scripts, images, fonts, root, html),
