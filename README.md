@@ -80,6 +80,8 @@ disable it.
   to suit your needs.
 - [`tailwind.config.cjs`](tailwind.config.cjs) contains TailwindCSS
   configuration.
+- [`docs`](docs) contains GET's internal documentation. You can remove or change
+  these for your own project as you like.
 - `src` contains the files you'll be working with:
   - [`src/fonts`](src/fonts) contain local font files; note related
     configuration in `tailwind.config.cjs`.
