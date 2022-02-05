@@ -4,7 +4,7 @@
 
 ## Reporting a Vulnerability
 
-If there are any vulnerabilities in **GET** , don't hesitate to _report them_.
+If there are any vulnerabilities in **GET**, don't hesitate to _report them_.
 
 1. Use any of the [contact options for rootwork](https://github.com/rootwork).
 

@@ -10,8 +10,9 @@ When contributing, especially for the first time, consider starting by
 [creating an issue](https://github.com/rootwork/GET/issues/new) so you can get
 feedback from the maintainers and avoid unncessary work.
 
-**Note:** GET has a [code of conduct](docs/CODE_OF_CONDUCT.md). Please follow it
-in all your interactions with the project.
+**Note:** GET has a
+[code of conduct](https://github.com/rootwork/GET/blob/main/docs/CODE_OF_CONDUCT.md).
+Please follow it in all your interactions with the project.
 
 ## Issues and feature requests
 

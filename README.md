@@ -159,8 +159,9 @@ the open-source community such an amazing place to learn, inspire, and create.
 Any contributions you make will benefit everybody else and are **greatly
 appreciated**.
 
-Please read [our contribution guidelines](docs/CONTRIBUTING.md), and thank you
-for being involved!
+Please read
+[our contribution guidelines](https://github.com/rootwork/GET/blob/main/docs/CONTRIBUTING.md),
+and thank you for being involved!
 
 ## Security
 
@@ -168,11 +169,11 @@ Legalese: GET is provided **"as is"** without any warranty. Use at your own
 risk.
 
 _For more information and to report security issues, please refer to our
-[security documentation](docs/SECURITY.md)._
+[security documentation](https://github.com/rootwork/GET/blob/main/docs/SECURITY.md)._
 
 # Thanks and Sponsorships
 
-<a href="https://www.multietch.com/"><img src="https://raw.githubusercontent.com/rootwork/GET/main/docs/images/sponsors/multietch.jpg" alt="Multi-Etch" width="75" height="75" align="left"></a>Work
+<a href="https://www.multietch.com/"><img src="https://raw.githubusercontent.com/rootwork/GET/main/docs/images/multietch.jpg" alt="Multi-Etch" width="75" height="75" align="left"></a>Work
 funded in part by <a href="https://www.multietch.com/">Multi-Etch,
 LLC</a>.<br />
 

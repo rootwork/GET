@@ -6,7 +6,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Before opening a bug report, please search for the behavior in the existing issues. **Security note: If you're reporting a vulnerability or other security issue, please see [our security policy](docs/SECURITY.md) for the procedure.**
+        Before opening a bug report, please search for the behavior in the existing issues. **Security note: If you're reporting a vulnerability or other security issue, please see [our security policy](https://github.com/rootwork/GET/blob/main/docs/SECURITY.md) for the procedure.**
 
         ---
 
