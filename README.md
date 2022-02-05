@@ -41,8 +41,6 @@ TailwindCSS, quickly generating simple sites, or working on SPAs.
 2. Run `npm install` Use Node 14.8.0 or higher if you want to take advantage of
    cache-busting.
 
-3. Edit or remove the contents of the `.github` folder to match your workflow.
-
 ## 🚧 Development
 
 `gulp` or `npm start`
@@ -54,14 +52,19 @@ and automatically reload whenever project files change.
 
 `gulp --prod` or `npm run prod`
 
-Take a look at the [included GitHub action](.github/workflows/build.yml) to
-automatically publish your project to GitHub Pages on every push. This own
-project uses it to build [the GET page](https://rootwork.github.io/GET/) itself!
+### Cache-busting
 
-Cache-busting runs on production builds only. It renames CSS, JS and image files
-by appending random strings, and updates references to those files in HTML, JS
-and CSS files. If you don't need cache-busting, you can turn it off by setting
-the `cacheBusting` option in `config.js` to `false`.
+On production builds all CSS, JS and image files are renamed by appending random
+strings, and references to those files in HTML, JS and CSS files are
+automatically rewritten. If you don't need cache-busting, you can turn it off by
+setting the `cacheBusting` option in `config.js` to `false`.
+
+### GitHub Actions
+
+The [included GitHub build action](.github/workflows/build.yml) will publish
+your project to GitHub Pages on every push. This own project uses it to build
+[the GET page](https://rootwork.github.io/GET/) itself! Edit the workflow to
+adapt it to your particular setup.
 
 ## 📂 Options and file structure
 
@@ -80,6 +83,24 @@ the `cacheBusting` option in `config.js` to `false`.
   - [`src/styles`](src/styles) contains Sass files that generate minified CSS.
 
 Build processes will generate files in `dist`, which is ignored by git.
+
+### .github
+
+If you aren't using GitHub for your project development, you can remove this
+directory entirely.
+
+If you are using GitHub, you can remove files directly under `.github` (e.g.
+[`CODEOWNERS`](.github/CODEOWNERS)), or edit them to align with your own
+project.
+
+Within the `workflows` directory, actions that begin with `internal_` are part
+of GET's project management, and can be removed if you don't want them to run in
+your own GitHub repo.
+
+### package.json
+
+You may want to edit the name, description, author, and URLs listed in this file
+to match your own project.
 
 ## ⚠️ Limitations
 
@@ -123,6 +144,7 @@ Other projects GET leverages:
 - https://github.com/scniro/gulp-clean-css
 - https://github.com/contra/gulp-concat
 - https://github.com/jonschlinkert/gulp-htmlmin
+- https://github.com/eneko89/cachekill
 - https://github.com/robrich/gulp-if
 - https://github.com/lazd/gulp-replace
 - https://github.com/yargs/yargs
