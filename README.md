@@ -84,7 +84,7 @@ adapt it to your particular setup.
 
 Build processes will generate files in `dist`, which is ignored by git.
 
-### .github
+### [`.github`](.github)
 
 If you aren't using GitHub for your project development, you can remove this
 directory entirely.
@@ -97,10 +97,10 @@ Within the `workflows` directory, actions that begin with `internal_` are part
 of GET's project management, and can be removed if you don't want them to run in
 your own GitHub repo.
 
-### package.json
+### [`package.json`](package.json)
 
 You may want to edit the name, description, author, and URLs listed in this file
-to match your own project.
+to match your own project. Run `npm i` to update `package-lock.json` to match.
 
 ## ⚠️ Limitations
 
