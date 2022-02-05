@@ -6,6 +6,14 @@ modules, and TailwindCSS (v3).**
 Great as a kickstart template for trying out TailwindCSS, quickly generating
 simple sites, mocking up design components or wireframes, or working on SPAs.
 
+<div align="center">
+
+[![License: MIT](https://img.shields.io/badge/license-%20MIT-blue?style=for-the-badge)](https://github.com/rootwork/GET/blob/main/LICENSE)
+[![Pull Requests welcome](https://img.shields.io/badge/PRs-welcome-ff69b4.svg?style=for-the-badge)](https://github.com/rootwork/GET/pulls?q=is%3Apr+is%3Aopen+sort%3Aupdated-desc)
+[![Coded with love by rootwork](https://img.shields.io/badge/%3C%2F%3E%20with%20%E2%99%A5%20by-rootwork-ff1414.svg?style=for-the-badge)](https://github.com/sponsors/rootwork)
+
+</div>
+
 ## ✨ Highlights
 
 - Sass compilation (in SCSS format, so you can use CSS directly if you prefer)
