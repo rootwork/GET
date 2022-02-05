@@ -1,8 +1,10 @@
 # GET: Gulp, ES6, TailwindCSS
 
-A starter project that GETs you up and running with Gulp (v4), ES6 JavaScript
-modules, and TailwindCSS (v3). Great as a kickstart template for trying out
-TailwindCSS, quickly generating simple sites, or working on SPAs.
+**A starter project that GETs you up and running with Gulp (v4), ES6 JavaScript
+modules, and TailwindCSS (v3).**
+
+Great as a kickstart template for trying out TailwindCSS, quickly generating
+simple sites, mocking up design components or wireframes, or working on SPAs.
 
 ## ✨ Highlights
 
