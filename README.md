@@ -134,6 +134,13 @@ To turn off GET's image and markup generation, set `modernImages` to `false` in
 [`config.js`](config.js). Images will still be minified, but alternate formats
 and markup will not be created.
 
+### Language direction
+
+Tailwind has
+[experimental support for language direction modifiers](https://tailwindcss.com/docs/hover-focus-and-other-states#rtl-support)
+(right-to-left and left-to-right only, at the moment). `dir="ltr"` is already
+set on the sample HTML file; change as needed.
+
 ## Getting support
 
 **[Ask a support question](https://github.com/rootwork/GET/issues/new?assignees=&labels=Type%3A+Question&template=03_support_question.yml&title=support%3A+)**
