@@ -6,15 +6,19 @@ on:
       # Build whenever the main branch is pushed.
       - 'main'
     paths-ignore:
-      # Exclude changes that only affect files in the `.github` directory.
+      # Exclude changes that only affect these directories and files.
       - '.github/**'
+      - 'docs/**'
+      - 'README.md'
   pull_request:
     branches:
       # Build whenever the main branch has a pull request.
       - 'main'
     paths-ignore:
-      # Exclude changes that only affect files in the `.github` directory.
+      # Exclude changes that only affect these directories and files.
       - '.github/**'
+      - 'docs/**'
+      - 'README.md'
 
 jobs:
   build:
