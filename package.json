@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "main": "gulpfile.js",
-  "description": "GET: Gulp, ES6, TailwindCSS",
+  "description": "GET: Gulp, ES6, TailwindCSS starterkit",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rootwork/GET.git"
