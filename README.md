@@ -113,7 +113,7 @@ other. In larger projects, a more efficient and robust templating system would
 make much more sense -- for instance see how a Hugo theme I've contributed to
 [handles it](https://github.com/chipzoller/hugo-clarity/blob/master/layouts/partials/image-feature.html#L35-L71).
 
-To omit GET's image and markup generation, set `modernImages` to `false` in
+To turn off GET's image and markup generation, set `modernImages` to `false` in
 [`config.js`](config.js). Images will still be minified, but alternate formats
 and markup will not be created.
 
