@@ -12,6 +12,7 @@ TailwindCSS, quickly generating simple sites, or working on SPAs.
 - Responsive image file and markup generation (`<picture>` sets with `webp` and
   `avif` formats), automatically.
 - HTML and Javascript minification.
+- Cache-busting of CSS, JS and image assets.
 - All the usual Tailwind 3 stuff, including
   [Just-In-Time mode](https://tailwindcss.com/blog/just-in-time-the-next-generation-of-tailwind-css)
   and
@@ -37,7 +38,8 @@ TailwindCSS, quickly generating simple sites, or working on SPAs.
 1b. Optional: Edit the project name, contact information and URLs in
 [`package.json`](package.json) to match your own.
 
-2. Run `npm install`
+2. Run `npm install` Use Node 14.8.0 or higher if you want to take advantage of
+   cache-busting.
 
 3. Edit or remove the contents of the `.github` folder to match your workflow.
 
@@ -56,7 +58,12 @@ Take a look at the [included GitHub action](.github/workflows/build.yml) to
 automatically publish your project to GitHub Pages on every push. This own
 project uses it to build [the GET page](https://rootwork.github.io/GET/) itself!
 
-## 📂 File structure
+Cache-busting runs on production builds only. It renames CSS, JS and image files
+by appending random strings, and updates references to those files in HTML, JS
+and CSS files. If you don't need cache-busting, you can turn it off by setting
+the `cacheBusting` option in `config.js` to `false`.
+
+## 📂 Options and file structure
 
 - [`config.js`](config.js) contains path and project configuration -- edit this
   to suit your needs.

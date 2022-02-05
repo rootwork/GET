@@ -29,6 +29,8 @@ import minifyJS from 'gulp-terser'
 import sharpResponsive from 'gulp-sharp-responsive'
 import replace from 'gulp-replace'
 
+import { cachekill } from 'cachekill'
+
 import logSymbols from 'log-symbols'
 
 // --prod on the CLI sets production environment
@@ -72,12 +74,34 @@ const imageMarkup = `
   <source srcset="$1-sm.webp" media="(max-width: 640px)" type="image/webp" />
   <source srcset="$1-md.webp" media="(max-width: 768px)" type="image/webp" />
   <source srcset="$1-lg.webp" media="(max-width: 1024px)" type="image/webp" />
-  <source srcset="$1-sm.jpeg" media="(max-width: 640px)" type="image/jpeg" />
-  <source srcset="$1-md.jpeg" media="(max-width: 768px)" type="image/jpeg" />
-  <source srcset="$1-lg.jpeg" media="(max-width: 1024px)" type="image/jpeg" />
+  <source srcset="$1-sm.jpg" media="(max-width: 640px)" type="image/jpeg" />
+  <source srcset="$1-md.jpg" media="(max-width: 768px)" type="image/jpeg" />
+  <source srcset="$1-lg.jpg" media="(max-width: 1024px)" type="image/jpeg" />
   $&
 </picture>
 `
+
+// Cache busting
+const bustCache = (sourceFiles, done) => {
+  sourceFiles = `${sourceFiles}/**/*`
+  const targetFiles = `${options.paths.dist.base}/**/*.{js,css,html}`
+  const hashLength = 6
+  const rename = true
+  return cachekill(sourceFiles, targetFiles, hashLength, rename)
+  done()
+}
+
+export const bustStylesCache = () => {
+  return bustCache(options.paths.dist.styles)
+}
+
+export const bustScriptsCache = () => {
+  return bustCache(options.paths.dist.js)
+}
+
+export const bustImagesCache = () => {
+  return bustCache(options.paths.dist.img)
+}
 
 // Browser serving
 const server = browserSync.create()
@@ -208,11 +232,27 @@ if (!PRODUCTION) {
     watchFiles
   )
 } else {
-  build = series(
-    clean,
-    parallel(styles, scripts, images, fonts, root, html),
-    complete
-  )
+  if (options.config.cacheBusting) {
+    build = series(
+      clean,
+      html,
+      parallel(
+        series(
+          parallel(scripts, styles, images),
+          series(bustScriptsCache, bustStylesCache, bustImagesCache)
+        ),
+        fonts,
+        root
+      ),
+      complete
+    )
+  } else {
+    build = series(
+      clean,
+      parallel(styles, scripts, images, fonts, root, html),
+      complete
+    )
+  }
 }
 
 export default build
