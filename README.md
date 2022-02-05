@@ -134,6 +134,13 @@ To turn off GET's image and markup generation, set `modernImages` to `false` in
 [`config.js`](config.js). Images will still be minified, but alternate formats
 and markup will not be created.
 
+### Dark mode
+
+Tailwind provides an option for
+[targeting styles for when dark mode is enabled](https://tailwindcss.com/docs/dark-mode)
+on a user's system using the `dark:` prefix, and this has been turned on in the
+Tailwind configuration.
+
 ### Language direction
 
 Tailwind has
