@@ -46,7 +46,6 @@ if (args.prod === true) {
 // Sharp should process jp(e)g, png, webp, gif, avif, heif, tiff
 // In practice, avif and heif source files are not recommended.
 const imageFormats = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'tiff']
-// Modern image replacement
 let imageOptions = {}
 
 if (options.config.modernImages) {
