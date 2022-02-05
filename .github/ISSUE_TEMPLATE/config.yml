@@ -1,0 +1,10 @@
+blank_issues_enabled: false
+contact_links:
+  - name: GET documentation
+    url: https://github.com/rootwork/GET/#readme
+    about:
+      Please be kind to others' time and be sure you've read GET's documentation
+      before opening a new issue.
+  - name: '@rootwork on Twitter'
+    url: https://twitter.com/rootwork
+    about: Send a message to GET's developer, Ivan Boothe, on Twitter

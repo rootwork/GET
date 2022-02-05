@@ -1,0 +1,15 @@
+name: Build
+description: Change the build process
+title: 'build: '
+labels: 'Type: Build'
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **This issue type is intended for changes to GET's build processes, for instance GitHub Actions.**
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+    validations:
+      required: true

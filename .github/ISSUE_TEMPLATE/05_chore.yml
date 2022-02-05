@@ -1,0 +1,15 @@
+name: Chore
+description: Maintenance task for GET
+title: 'chore: '
+labels: 'Type: Chore'
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Use this issue type only for routine maintenace tasks such as marking a release.**
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+    validations:
+      required: true

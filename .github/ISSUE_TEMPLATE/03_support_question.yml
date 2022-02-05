@@ -1,0 +1,28 @@
+name: Support question
+description: Ask a question about how to use GET
+title: 'support: '
+labels: 'Type: Question'
+body:
+  - type: dropdown
+    id: os
+    attributes:
+      label: What operating system are you running?
+      options:
+        - Linux
+        - Mac
+        - Windows
+    validations:
+      required: true
+  - type: input
+    id: v_node
+    attributes:
+      label: Node version
+      description: 'Run `node --version` and paste the output here.'
+    validations:
+      required: true
+  - type: textarea
+    id: question
+    attributes:
+      label: Your question
+    validations:
+      required: true
