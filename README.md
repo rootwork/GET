@@ -13,7 +13,7 @@ simple sites, mocking up design components or wireframes, or working on SPAs.
 -
 <a href="https://github.com/rootwork/GET/issues/new?assignees=&labels=Type%3A+Question&template=03_support_question.yml&title=support%3A+">Ask a Question</a></strong>
 
-<br /><br />
+<br />
 
 [![License: MIT](https://img.shields.io/badge/license-%20MIT-blue?style=for-the-badge)](https://github.com/rootwork/GET/blob/main/LICENSE)
 [![Pull Requests welcome](https://img.shields.io/badge/PRs-welcome-ff69b4.svg?style=for-the-badge)](https://github.com/rootwork/GET/pulls?q=is%3Apr+is%3Aopen+sort%3Aupdated-desc)
