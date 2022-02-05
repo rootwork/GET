@@ -77,7 +77,7 @@ setting the `cacheBusting` option in `config.js` to `false`.
 ### GitHub Actions
 
 The [included GitHub build action](.github/workflows/build.yml) will publish
-your project to GitHub Pages on every push. This own project uses it to build
+your project to GitHub Pages on every push. We use it to build
 [the GET page](https://rootwork.github.io/GET/) itself!
 
 Edit the workflow to adapt it to your particular setup, or remove it entirely to
