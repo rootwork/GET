@@ -154,6 +154,7 @@ Other projects GET leverages:
 - https://github.com/eneko89/cachekill
 - https://github.com/robrich/gulp-if
 - https://github.com/lazd/gulp-replace
+- https://github.com/dec0dOS/amazing-github-template
 - https://github.com/yargs/yargs
 - https://github.com/sindresorhus/log-symbols
 
