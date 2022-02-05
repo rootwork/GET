@@ -50,6 +50,8 @@ simple sites, mocking up design components or wireframes, or working on SPAs.
 
 ## 🔠 Installation
 
+**Node v.14.8.0 or above**
+
 1. Clone or fork this project.
 
 1b. Optional: Edit the project name, contact information and URLs in
