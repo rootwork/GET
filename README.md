@@ -63,8 +63,10 @@ setting the `cacheBusting` option in `config.js` to `false`.
 
 The [included GitHub build action](.github/workflows/build.yml) will publish
 your project to GitHub Pages on every push. This own project uses it to build
-[the GET page](https://rootwork.github.io/GET/) itself! Edit the workflow to
-adapt it to your particular setup.
+[the GET page](https://rootwork.github.io/GET/) itself!
+
+Edit the workflow to adapt it to your particular setup, or remove it entirely to
+disable it.
 
 ## 📂 Options and file structure
 
@@ -102,14 +104,13 @@ your own GitHub repo.
 You may want to edit the name, description, author, and URLs listed in this file
 to match your own project. Run `npm i` to update `package-lock.json` to match.
 
-## ⚠️ Limitations
+### Modern image and markup generation
 
-Responsive image generation and markup generation is designed for single-page
-sites with a handful of images. The markup generation is just regex string
-replacement, and images that have the same name but different formats will
-clobber each other. In larger projects, a more efficient and robust templating
-system would make much more sense -- for instance see how a Hugo theme I've
-contributed to
+⚠️ This feature is designed for single-page sites with a handful of images. The
+markup generation is just regex string replacement, and images that have the
+same name but different formats (e.g. `foo.jpg` and `foo.gif`) will clobber each
+other. In larger projects, a more efficient and robust templating system would
+make much more sense -- for instance see how a Hugo theme I've contributed to
 [handles it](https://github.com/chipzoller/hugo-clarity/blob/master/layouts/partials/image-feature.html#L35-L71).
 
 To omit GET's image and markup generation, set `modernImages` to `false` in
