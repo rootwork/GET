@@ -16,6 +16,9 @@ module.exports = {
       'dark-mode': {
         raw: '(prefers-color-scheme: dark)',
       },
+      // Use the 'print:' prefix for print-only styles. See:
+      // https://tailwindcss.com/docs/hover-focus-and-other-states#print-styles
+      print: { raw: 'print' },
     },
   },
   plugins: [require('@tailwindcss/typography')],

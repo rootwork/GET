@@ -141,6 +141,13 @@ Tailwind provides an option for
 on a user's system using the `dark:` prefix, and this has been turned on in the
 Tailwind configuration.
 
+### Print styles
+
+Tailwind provides an option for
+[targeting styles for print-only styles](https://tailwindcss.com/docs/hover-focus-and-other-states#print-styles)
+on a user's system using the `print:` prefix, and this has been turned on in the
+Tailwind configuration.
+
 ### Language direction
 
 Tailwind has
