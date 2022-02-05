@@ -180,9 +180,6 @@ LLC</a>.<br />
 **Consider [sponsoring rootwork](https://github.com/sponsors/rootwork), GET's
 developer, and have your name or logo included here!**
 
-GET is built on all sorts of open-source code. Our appreciation to all of these
-fine projects:
-
 ## 📑 Built with
 
 GET originally inspired by https://github.com/stefansdev/creativdepot and
