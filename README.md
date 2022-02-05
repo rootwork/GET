@@ -6,9 +6,21 @@ modules, and TailwindCSS (v3).**
 Great as a kickstart template for trying out TailwindCSS, quickly generating
 simple sites, mocking up design components or wireframes, or working on SPAs.
 
+<div align="center">
+<br /><br />
+<a href="https://github.com/rootwork/GET/issues/new?assignees=&labels=Type%3A+Bug&template=01_bug_report.yml&title=bug%3A+">Report a Bug</a>
+-
+<a href="https://github.com/rootwork/GET/issues/new?assignees=&labels=Type%3A+Feature&template=02_feature_request.yml&title=feat%3A+">Request a Feature</a>
+-
+<a href="https://github.com/rootwork/GET/issues/new?assignees=&labels=Type%3A+Question&template=03_support_question.yml&title=support%3A+">Ask a Question</a>
+
+<br />
+
 [![License: MIT](https://img.shields.io/badge/license-%20MIT-blue?style=for-the-badge)](https://github.com/rootwork/GET/blob/main/LICENSE)
 [![Pull Requests welcome](https://img.shields.io/badge/PRs-welcome-ff69b4.svg?style=for-the-badge)](https://github.com/rootwork/GET/pulls?q=is%3Apr+is%3Aopen+sort%3Aupdated-desc)
 [![Coded with love by rootwork](https://img.shields.io/badge/%3C%2F%3E%20with%20%E2%99%A5%20by-rootwork-ff1414.svg?style=for-the-badge)](https://github.com/sponsors/rootwork)
+
+</div>
 
 ## ✨ Highlights
 
@@ -124,6 +136,52 @@ make much more sense -- for instance see how a Hugo theme I've contributed to
 To turn off GET's image and markup generation, set `modernImages` to `false` in
 [`config.js`](config.js). Images will still be minified, but alternate formats
 and markup will not be created.
+
+## Getting support
+
+**[Ask a support question](https://github.com/rootwork/GET/issues/new?assignees=&labels=Type%3A+Question&template=03_support_question.yml&title=support%3A+)**
+on GitHub if you're stuck.
+
+## Helping out
+
+- 🌟 Add a [GitHub Star](https://github.com/premail/premail) to the project.
+- Tweet about GET on Twitter).
+- Consider [sponsoring rootwork](https://github.com/sponsors/rootwork), GET's
+  developer, and have
+  [your name or logo included here](#thanks-and-sponsorships)!
+- Blog about the project. We love reviews, and are eager to hear ways we could
+  make things even better.
+- Contribute!
+
+### Contributing
+
+First off, thanks for taking the time to contribute! Contributions are what make
+the open-source community such an amazing place to learn, inspire, and create.
+Any contributions you make will benefit everybody else and are **greatly
+appreciated**.
+
+Please read [our contribution guidelines](/docs/CONTRIBUTING.md), and thank you
+for being involved!
+
+## Security
+
+Legalese: GET is provided **"as is"** without any warranty. Use at your own
+risk.
+
+_For more information and to report security issues, please refer to our
+[security documentation](/docs/SECURITY.md)._
+
+# Thanks and Sponsorships
+
+<a href="https://www.multietch.com/"><img src="https://raw.githubusercontent.com/rootwork/GET/main/docs/images/sponsors/multietch.jpg" alt="Multi-Etch" width="75" height="75" align="left"></a>Work
+funded in part by <a href="https://www.multietch.com/">Multi-Etch,
+LLC</a>.<br />
+
+**Consider [sponsoring rootwork](https://github.com/sponsors/rootwork), GET's
+developer, and have your name or logo included here!**
+
+Premail is built on all sorts of open-source code. Our appreciation to all of
+these fine projects:
 
 ## 📑 Built with
 
