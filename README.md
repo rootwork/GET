@@ -152,8 +152,9 @@ Tailwind configuration.
 
 Tailwind has
 [experimental support for language direction modifiers](https://tailwindcss.com/docs/hover-focus-and-other-states#rtl-support)
-(right-to-left and left-to-right only, at the moment). `dir="ltr"` is already
-set on the sample HTML file; change as needed.
+using `rtl:` and `ltr:` prefixes (only those, at the moment). To help support
+this, `dir="ltr"` is already set on the sample HTML file; change as needed to
+set the overall language direction for the page.
 
 ## Getting support
 
