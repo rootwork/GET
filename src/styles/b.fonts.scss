@@ -1,6 +1,7 @@
 // Load fonts in a cross-browser-compatible way. Font files themselves are
 // located in /src/fonts and configuration is in the `fontFamily` item in
-// tailwind.config.cjs at the root of the project.
+// tailwind.config.cjs at the root of the project. These fonts are also
+// preloaded at the top of the example HTML file.
 //
 // As with everything in GET, this is meant as a starting example only --
 // replace or remove these styles and font files as necessary.
