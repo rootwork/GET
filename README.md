@@ -28,6 +28,7 @@ simple sites, mocking up design components or wireframes, or working on SPAs.
   [Dart Sass](https://sass-lang.com/dart-sass).
 - Responsive image file and markup generation (`<picture>` sets with `webp` and
   `avif` formats), automatically.
+- Modern (2022) HTML5 boilerplate, heavily commented to guide you in your work.
 - HTML and Javascript minification.
 - Cache-busting of CSS, JS and image assets.
 - All the usual Tailwind 3 stuff, including
