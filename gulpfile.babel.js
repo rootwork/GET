@@ -104,7 +104,7 @@ export const bustImagesCache = () => {
 
 // Browser serving
 const server = browserSync.create()
-export const serve = () => {
+export const serve = (done) => {
   server.init({
     server: {
       baseDir: options.paths.dist.base,
@@ -114,7 +114,7 @@ export const serve = () => {
 }
 
 // Browser reloads
-export const reload = () => {
+export const reload = (done) => {
   console.log('\n\t' + logSymbols.info, 'Reloading browser preview.\n')
   server.reload()
 }
@@ -139,6 +139,7 @@ export const html = () => {
     )
     .pipe(gulpif(PRODUCTION, minifyHTML({ collapseWhitespace: true })))
     .pipe(dest(options.paths.dist.base))
+    .pipe(server.stream())
 }
 
 // Root files processing
@@ -160,6 +161,7 @@ export const styles = () => {
     .pipe(gulpif(PRODUCTION, minifyCSS({ compatibility: '*' })))
     .pipe(gulpif(!PRODUCTION, sourcemaps.write()))
     .pipe(dest(options.paths.dist.styles))
+    .pipe(server.stream())
 }
 
 // Script processing
@@ -200,16 +202,16 @@ export const fonts = () => {
 
 // Watch tasks
 export const watchFiles = () => {
-  watch(`${options.paths.src.base}/**/*.html`, series(html, styles, reload))
+  console.log('\n\t' + logSymbols.info, 'Watching for changes...\n')
+  watch(`${options.paths.src.base}/**/*.html`, parallel(html, styles))
   watch(`${options.paths.src.rootFiles}/**/*`, series(root, reload))
   watch(
     [options.config.tailwindjs, `${options.paths.src.styles}/**/*.scss`],
-    series(styles, reload)
+    series(styles)
   )
   watch(`${options.paths.src.js}/**/*.js`, series(scripts, reload))
   watch(`${options.paths.src.img}/**/*`, series(images, reload))
   watch(`${options.paths.src.fonts}/**/*`, series(fonts, reload))
-  console.log('\n\t' + logSymbols.info, 'Watching for changes...\n')
 }
 
 // Build notification
