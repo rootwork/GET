@@ -111,12 +111,14 @@ export const serve = (done) => {
     },
     port: options.config.port || 5000,
   })
+  done()
 }
 
 // Browser reloads
 export const reload = (done) => {
   console.log('\n\t' + logSymbols.info, 'Reloading browser preview.\n')
   server.reload()
+  done()
 }
 
 // Cleanup
@@ -139,7 +141,6 @@ export const html = () => {
     )
     .pipe(gulpif(PRODUCTION, minifyHTML({ collapseWhitespace: true })))
     .pipe(dest(options.paths.dist.base))
-    .pipe(server.stream())
 }
 
 // Root files processing
@@ -161,7 +162,6 @@ export const styles = () => {
     .pipe(gulpif(PRODUCTION, minifyCSS({ compatibility: '*' })))
     .pipe(gulpif(!PRODUCTION, sourcemaps.write()))
     .pipe(dest(options.paths.dist.styles))
-    .pipe(server.stream())
 }
 
 // Script processing
@@ -203,11 +203,14 @@ export const fonts = () => {
 // Watch tasks
 export const watchFiles = () => {
   console.log('\n\t' + logSymbols.info, 'Watching for changes...\n')
-  watch(`${options.paths.src.base}/**/*.html`, parallel(html, styles))
+  watch(
+    `${options.paths.src.base}/**/*.html`,
+    series(parallel(html, styles), reload)
+  )
   watch(`${options.paths.src.rootFiles}/**/*`, series(root, reload))
   watch(
     [options.config.tailwindjs, `${options.paths.src.styles}/**/*.scss`],
-    series(styles)
+    series(styles, reload)
   )
   watch(`${options.paths.src.js}/**/*.js`, series(scripts, reload))
   watch(`${options.paths.src.img}/**/*`, series(images, reload))
