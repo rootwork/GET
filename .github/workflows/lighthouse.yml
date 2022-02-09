@@ -1,0 +1,16 @@
+name: Lighthouse
+# For more information, see:
+# https://developers.google.com/web/tools/lighthouse/
+# https://github.com/GoogleChrome/lighthouse-ci/blob/main/README.md
+on: [push]
+jobs:
+  lighthouseci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - run: npm install && npm install -g @lhci/cli@0.8.x
+      - run: npm run build
+      - run: lhci autorun
