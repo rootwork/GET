@@ -4,9 +4,10 @@ on:
     branches:
       # Build whenever the main branch is pushed.
       - 'main'
-  branches:
-    # Build whenever the main branch has a pull request.
-    - 'main'
+  pull_request:
+    branches:
+      # Build whenever the main branch has a pull request.
+      - 'main'
 jobs:
   pa11y:
     runs-on: ubuntu-latest
