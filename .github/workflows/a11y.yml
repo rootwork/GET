@@ -27,7 +27,7 @@ on:
       - 'docs/**'
       - 'README.md'
 jobs:
-  axe:
+  check_a11y:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -42,7 +42,7 @@ jobs:
           npm ci
       - name: Build production site
         run: |
-          npm start
+          gulp --noop
           npx wait-on http://localhost:9050
       - name: Run pa11y
         run: |
