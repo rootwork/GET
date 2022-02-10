@@ -41,6 +41,14 @@ if (args.prod === true) {
   PRODUCTION = false
 }
 
+// --noop on the CLI prevents browserSync from opening a browser
+let HEADLESS
+if (args.noop === true) {
+  HEADLESS = true
+} else {
+  HEADLESS = false
+}
+
 // Image formats and replacement
 //
 // Sharp should process jp(e)g, png, webp, gif, avif, heif, tiff
@@ -104,13 +112,18 @@ export const bustImagesCache = () => {
 
 // Browser serving
 const server = browserSync.create()
+const serverOpts = {
+  server: {
+    baseDir: options.paths.dist.base,
+  },
+  port: options.config.port || 5000,
+}
+if (HEADLESS) {
+  serverOpts.open = false
+}
+
 export const serve = (done) => {
-  server.init({
-    server: {
-      baseDir: options.paths.dist.base,
-    },
-    port: options.config.port || 5000,
-  })
+  server.init(serverOpts)
   done()
 }
 

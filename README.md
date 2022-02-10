@@ -62,7 +62,8 @@ simple sites, mocking up design components or wireframes, or working on SPAs.
 `gulp` or `npm start`
 
 After the site is built, your default web browser will open with the index file
-and automatically reload whenever project files change.
+and automatically reload whenever project files change. (If you don't want a
+browser to open automatically, use `gulp --noop`.)
 
 ## 🚚 Production
 
