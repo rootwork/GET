@@ -1,4 +1,4 @@
-name: Check accessibility (pa11y)
+name: Check accessibility (axe)
 on:
   push:
     branches:
@@ -9,7 +9,7 @@ on:
       # Build whenever the main branch has a pull request.
       - 'main'
 jobs:
-  pa11y:
+  axe:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -19,7 +19,7 @@ jobs:
           node-version: 14.x
       - run: npm ci
       - run: npm start & npx wait-on http://localhost:9050
-      - name: Run pa11y
+      - name: Run axe
         run: |
-          npm install -g pa11y
-          pa11y http://localhost:9050
+          npm install -g @axe-core/cli
+          axe http://localhost:9050 --exit
