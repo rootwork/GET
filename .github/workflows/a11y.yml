@@ -39,7 +39,7 @@ jobs:
       - name: Install dependencies
         # The first line of `run` is designed to omit husky setup, since it's
         # not necessary or desireable in a remote build.
-      - run: |
+        run: |
           npm set-script prepare ""
           npm ci
       - name: Build production site
