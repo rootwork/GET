@@ -1,8 +1,12 @@
-name: Run accessibility (a11y) tests
-# This action uses both axe (axe-core/cli) and pa11y to check for accessibility
-# errors. This action will fail when errors are found. If you'd rather it only
-# warn you about accessibility issues but not fail when issues are found, remove
-# or comment out the "Run pa11y" step, and use the "Run axe" step instead.
+name: Check accessibility (a11y)
+# This action uses pa11y to check for accessibility issues using aXe and HTML
+# Code Sniffer. This action will fail when errors are found. If you'd rather it
+# only warn you about accessibility issues but not fail when issues are found,
+# remove or comment out the "Run pa11y" step, and use the "Run axe" step
+# instead.
+#
+# If you change your port in `config.js`, be sure to update the commands below
+# as well.
 #
 # More information and approaches:
 # https://www.adrianbolonio.com/en/accessibility-github-actions/
@@ -40,9 +44,9 @@ jobs:
         run: |
           npm set-script prepare ""
           npm ci
-      - name: Build production site
+      - name: Generate site
         run: |
-          gulp --noop
+          npm start
           npx wait-on http://localhost:9050
       - name: Run pa11y
         run: |
