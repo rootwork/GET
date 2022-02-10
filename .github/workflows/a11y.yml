@@ -1,10 +1,11 @@
 name: Run accessibility (a11y) tests
 # This action uses both axe (axe-core/cli) and pa11y to check for accessibility
 # errors. This action will fail when errors are found. If you'd rather it only
-# warn you about accessibility issues but not fail when issues are found, remove
-# or comment out the "Run pa11y" step, and use the "Run axe" step instead.
+# warn you about accessibility issues but not fail when issues are found, you
+# could use axe's cli instead:
+# https://www.npmjs.com/package/@axe-core/cli
 #
-# More information:
+# More information and approaches:
 # https://www.adrianbolonio.com/en/accessibility-github-actions/
 
 on:
@@ -41,14 +42,8 @@ jobs:
           npm set-script prepare ""
           npm ci
       - name: Build production site
-        run: |
-          npm run prod
-          npx wait-on http://localhost:3000
+        run: npm run prod
       - name: Run pa11y
         run: |
           npm install -g pa11y
           pa11y --runner axe --runner htmlcs ./dist
-      # - name: Run axe
-      #   run: |
-      #     npm install -g @axe-core/cli
-      #     axe http://localhost:3000
