@@ -1,0 +1,56 @@
+name: Run accessibility (a11y) tests
+# This action uses both axe (axe-core/cli) and pa11y to check for accessibility
+# errors. This action will fail when errors are found. If you'd rather it only
+# warn you about accessibility issues but not fail when issues are found, remove
+# the "Run pa11y" step entirely, and remove `--exit` from the axe step.
+#
+# More information:
+# https://www.adrianbolonio.com/en/accessibility-github-actions/
+
+on:
+  push:
+    branches:
+      # Build whenever the main branch is pushed.
+      - 'main'
+    paths-ignore:
+      # Exclude changes that only affect these directories and files.
+      - '.github/**'
+      - 'docs/**'
+      - 'README.md'
+  pull_request:
+    branches:
+      # Build whenever the main branch has a pull request.
+      - 'main'
+    paths-ignore:
+      # Exclude changes that only affect these directories and files.
+      - '.github/**'
+      - 'docs/**'
+      - 'README.md'
+jobs:
+  axe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - name: Install dependencies
+        # The first line of `run` is designed to omit husky setup, since it's
+        # not necessary or desireable in a remote build.
+      - run: |
+          npm set-script prepare ""
+          npm ci
+      - name: Build production site
+        run: |
+          npm start
+          npx wait-on http://localhost:9050
+      - name: Run pa11y
+        run: |
+          npm install -g pa11y
+          pa11y http://localhost:9050
+      - name: Run axe
+        run: |
+          npm install -g @axe-core/cli
+          axe http://localhost:9050 --exit
