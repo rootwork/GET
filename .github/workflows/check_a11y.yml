@@ -50,7 +50,7 @@ jobs:
       - name: Run pa11y
         run: |
           npm install -g pa11y
-          pa11y --runner axe --runner htmlcs http://localhost:9050
+          pa11y --runner axe --runner htmlcs --ignore color-contrast --standard WCAG2AA http://localhost:9050
       # - name: Run axe
       #   run: |
       #     npm install -g @axe-core/cli
