@@ -45,9 +45,10 @@ simple sites, mocking up design components or wireframes, or working on SPAs.
 - **Bonus:** [Prettier](https://prettier.io/) is integrated and runs on every
   commmit using Husky and Pretty Quick. You can run it on all files at any time
   by using `npm run format`.
-- **Bonus:** A GitHub Pages action is included that automatically builds and
-  publishes your site each time you push to `main`. Don't use GitHub for
-  development? You can remove the `.github` subdirectory.
+- **Bonus:** Optional automatic publishing to GitHub Pages each time you push to
+  `main`.
+- **Bonus:** Optional accessibility checking with
+  [pa11y](https://www.npmjs.com/package/pa11y).
 
 ## 🔠 Installation
 
@@ -78,12 +79,21 @@ setting the `cacheBusting` option in `config.js` to `false`.
 
 ### GitHub Actions
 
-The [included GitHub build action](.github/workflows/build.yml) will publish
-your project to GitHub Pages on every push. We use it to build
+A [GitHub build action](.github/workflows/build.yml) will publish your project
+to GitHub Pages on every push. We use it to build
 [the GET page](https://rootwork.github.io/GET/) itself!
 
-Edit the workflow to adapt it to your particular setup, or remove it entirely to
-disable it.
+A [GitHub accessibility action](.github/workflows/check_a11y.yml) will check
+your project for common a11y issues when you push to your repo. You may want to
+replace this with accessibility checking in your build process to ensure issues
+are addressed earlier in your development cycle.
+
+There are [other workflows](.github/workflows) with `internal_` prefixes that
+are used to manage the GET project itself. These can be safely removed, or you
+can use them as templates for your own workflows.
+
+With all workflows, edit or remove the files as necessary to fit your own
+project and process!
 
 ## 📂 Options and file structure
 
