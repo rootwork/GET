@@ -3,7 +3,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        fontello: ['fontello'],
+        raleway: ['Raleway'],
       },
     },
     screens: {
@@ -21,8 +21,5 @@ module.exports = {
       print: { raw: 'print' },
     },
   },
-  plugins: [
-    require('@tailwindcss/typography'),
-    require('tailwindcss-textshadow'),
-  ],
+  plugins: [require('@tailwindcss/typography')],
 }
