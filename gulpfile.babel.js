@@ -152,12 +152,7 @@ export const html = () => {
         )
       )
     )
-    .pipe(
-      gulpif(
-        PRODUCTION,
-        minifyHTML({ collapseWhitespace: true, removeComments: true })
-      )
-    )
+    .pipe(gulpif(PRODUCTION, minifyHTML({ collapseWhitespace: true })))
     .pipe(dest(options.paths.dist.base))
 }
 
