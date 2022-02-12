@@ -14,6 +14,7 @@
 // https://tailwindcss.com/docs/font-family
 // https://stackoverflow.com/a/67190784
 // https://tailwindcss.com/docs/theme#extending-the-default-theme
+// https://google-webfonts-helper.herokuapp.com/fonts
 
 @layer base {
   @font-face {
@@ -32,4 +33,10 @@
     font-weight: 300 800;
     font-style: italic;
   }
+
+  // Want to apply the custom font to your entire page? Uncomment the next ruleset.
+
+  // body {
+  //   @apply font-raleway; // This matches the name defined in tailwind.config.cjs
+  // }
 }
